@@ -4,13 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {
-  Phone,
-  Calendar,
   MessageCircle,
   MapPinnedIcon,
   VerifiedIcon,
   PhoneIcon,
-  CurrencyIcon,
   CoinsIcon,
 } from "lucide-react";
 import { MdEdit } from "react-icons/md";
@@ -25,7 +22,7 @@ export function ProfileInfo() {
 
   const categories = ["Category 1", "Category 2", "Category 3"];
   const phoneNumber = "+1234567890";
-  const birthDate = "1990-01-01";
+  //const birthDate = "1990-01-01";
 
   function transformString(input: string): string {
     return input

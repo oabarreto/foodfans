@@ -10,7 +10,7 @@ const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+$/;
 const accountTypeEnum = z.enum(
   accountTypeOptions.map((opt) => opt.value) as [AccountType, ...AccountType[]],
   {
-    errorMap: (issue, ctx) => ({ message: "Account type must be selected" }),
+    errorMap: () => ({ message: "Account type must be selected" }),
   }
 );
 

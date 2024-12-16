@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+//import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 
 export function ProfileGallery() {
-  const [filter, setFilter] = useState("all");
+  //const [filter, setFilter] = useState("all");
 
   const items = [
     {

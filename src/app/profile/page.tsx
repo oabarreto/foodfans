@@ -3,17 +3,12 @@
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, Flag, MapPinnedIcon, VerifiedIcon } from "lucide-react";
+import { Heart, Flag } from "lucide-react";
 import { ProfileGallery } from "@/components/Profile/gallery";
-import { ProfileStories } from "@/components/Profile/stories";
 import { ProfileReviews } from "@/components/Profile/reviews";
 import { ProfileInfo } from "@/components/Profile/info";
-import { ProfileServices } from "@/components/Profile/services";
 import { cn } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MdEdit } from "react-icons/md";
 
 export default function ProfilePage() {
   const [isFavorite, setIsFavorite] = useState(false);

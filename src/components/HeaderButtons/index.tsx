@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Button } from "../ui/button";
-import { IoEnterOutline } from "react-icons/io5";
 import { FiLogIn } from "react-icons/fi";
 
 interface HeaderButtonProps {

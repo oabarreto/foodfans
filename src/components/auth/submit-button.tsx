@@ -4,11 +4,7 @@ import { Button } from "@/components/ui/button";
 import { SubmitButtonProps } from "@/lib/types/form";
 import { Loader2 } from "lucide-react";
 
-export function SubmitButton({
-  isSubmitting,
-  text,
-  loadingText,
-}: SubmitButtonProps) {
+export function SubmitButton({ isSubmitting, text }: SubmitButtonProps) {
   return (
     <Button
       type="submit"

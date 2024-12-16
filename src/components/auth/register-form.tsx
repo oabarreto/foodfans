@@ -9,12 +9,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export function RegisterForm() {
-  const { onSubmit, isPending } = useAuthForm();
+  const { onSubmit } = useAuthForm();
 
   const {
     handleSubmit,
     control,
-    register,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),

@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button";
 import { ImagePlus, VideoIcon } from "lucide-react";
 
 interface ProfileEditFormProps {
-  form: UseFormReturn<any>;
+  form: UseFormReturn;
 }
 
 export function ProfileEditForm({ form }: ProfileEditFormProps) {

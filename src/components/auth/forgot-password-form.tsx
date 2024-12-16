@@ -12,12 +12,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export function ForgotPasswordForm() {
-  const { onSubmit, isPending } = useAuthForm();
+  const { onSubmit } = useAuthForm();
 
   const {
     handleSubmit,
     control,
-    register,
     formState: { errors, isSubmitting },
   } = useForm<ForgotPasswordFormValues>({
     resolver: zodResolver(forgotPasswordSchema),

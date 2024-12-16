@@ -1,6 +1,6 @@
 "use client";
 
-import { Star, CheckIcon, VerifiedIcon } from "lucide-react";
+import { Star, VerifiedIcon } from "lucide-react";
 interface CatalogCardProps {
   name: string;
   description?: string;

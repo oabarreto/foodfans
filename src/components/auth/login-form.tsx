@@ -14,12 +14,11 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ onForgotPassword }: LoginFormProps) {
-  const { onSubmit, isPending } = useAuthForm();
+  const { onSubmit } = useAuthForm();
 
   const {
     handleSubmit,
     control,
-    register,
     formState: { errors, isSubmitting },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),

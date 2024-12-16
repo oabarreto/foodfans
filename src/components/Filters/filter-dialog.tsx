@@ -20,7 +20,7 @@ import { TextFilters } from "./text-filters";
 import { AdditionalFilters } from "./additional-filters";
 
 import { categories } from "@/lib/constants/filters";
-import type { FilterState, FilterOption } from "@/lib/types/filters";
+import type { FilterState } from "@/lib/types/filters";
 
 export function FilterDialog() {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +55,7 @@ export function FilterDialog() {
     const applied: string[] = [];
 
     // Add category filters
-    Object.entries(categories).forEach(([key, _]) => {
+    Object.entries(categories).forEach(([key]) => {
       filters[key as keyof typeof categories].forEach((item) => {
         if (item.checked) {
           applied.push(item.label);
@@ -217,7 +217,7 @@ export function FilterDialog() {
                 <button
                   onClick={() => {
                     // Handle removing individual filters
-                    const [type, value] = filter.split(": ");
+                    const [type] = filter.split(": ");
                     if (type === "Country") {
                       setFilters((prev) => ({
                         ...prev,
