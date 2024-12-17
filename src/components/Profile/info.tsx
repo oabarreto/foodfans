@@ -12,7 +12,8 @@ import {
 import { MdEdit } from "react-icons/md";
 import { EditDialog } from "./edit-dialog";
 import { EditPersonalForm } from "./edit-personal-form";
-import { useAuthForm } from "@/lib/hooks/use-auth-form";
+import { EditAboutForm } from "./edit-about-form";
+import { EditServicesForm } from "./edit-services-form";
 
 export function ProfileInfo() {
   const physicalCharacteristics = {
@@ -22,7 +23,7 @@ export function ProfileInfo() {
     hairColor: "Black",
   };
 
-  const categories = ["Category 1", "Category 2", "Category 3"];
+  const services = ["service 1", "service 2", "service 3"];
   const phoneNumber = "+1234567890";
   //const birthDate = "1990-01-01";
 
@@ -37,29 +38,23 @@ export function ProfileInfo() {
     window.open(`https://wa.me/${phoneNumber.replace(/\D/g, "")}`, "_blank");
   };
 
-  const { onSubmit: personalSubmit } = useAuthForm();
-
   return (
     <div className="space-y-6">
       <Card className="bg-neutral-100">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-muted-foreground">Personnal</CardTitle>
-          {/* <Button
-            size="icon"
-            className={
-              "bg-rose-400 hover:bg-neutral-300 text-neutral-100 hover:text-rose-400 m-0"
-            }
-          >
-            <MdEdit />
-          </Button> */}
-          <EditDialog title={"Personnal"} submit={() => console.log("Save")}>
-            <EditPersonalForm onSubmitExternal={personalSubmit} />
+          <CardTitle className="text-muted-foreground text-ellipsis overflow-hidden">
+            Personnal
+          </CardTitle>
+          <EditDialog title={"Personnal"}>
+            <EditPersonalForm />
           </EditDialog>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="flex items-center justify-start gap-2">
             <MapPinnedIcon className="text-muted-foreground" size={20} />
-            <span className="text-muted-foreground">New York</span>
+            <span className="text-muted-foregroundtext-ellipsis overflow-hidden">
+              New York
+            </span>
           </div>
           <div className="flex items-center gap-2 text-muted-foreground">
             <PhoneIcon size={20} />
@@ -84,15 +79,12 @@ export function ProfileInfo() {
 
       <Card className="bg-neutral-100">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-muted-foreground">About</CardTitle>
-          <Button
-            size="icon"
-            className={
-              "bg-rose-400 hover:bg-neutral-300 text-neutral-100 hover:text-rose-400 m-0 min-w-10"
-            }
-          >
-            <MdEdit />
-          </Button>
+          <CardTitle className="text-muted-foreground text-ellipsis overflow-hidden">
+            About
+          </CardTitle>
+          <EditDialog title={"About"}>
+            <EditAboutForm />
+          </EditDialog>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground">
@@ -103,7 +95,7 @@ export function ProfileInfo() {
 
       <Card className="bg-neutral-100">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-muted-foreground">
+          <CardTitle className="text-muted-foreground text-ellipsis overflow-hidden">
             Physical Characteristics
           </CardTitle>
           <Button
@@ -133,24 +125,19 @@ export function ProfileInfo() {
 
       <Card className="bg-neutral-100">
         <CardHeader className="flex-row items-center justify-between">
-          <CardTitle className="text-muted-foreground">Categories</CardTitle>
-          <Button
-            size="icon"
-            className={
-              "bg-rose-400 hover:bg-neutral-300 text-neutral-100 hover:text-rose-400 m-0 min-w-10"
-            }
-          >
-            <MdEdit />
-          </Button>
+          <CardTitle className="text-muted-foreground">services</CardTitle>
+          <EditDialog title={"Services"}>
+            <EditServicesForm />
+          </EditDialog>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+            {services.map((service) => (
               <Badge
-                key={category}
+                key={service}
                 className="gap-1 bg-rose-500 hover:bg-neutral-200 text-neutral-100 hover:text-rose-500 font-medium py-2"
               >
-                {category}
+                {service}
               </Badge>
             ))}
           </div>

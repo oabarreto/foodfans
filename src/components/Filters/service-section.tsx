@@ -11,17 +11,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "../ui/button";
 import { useState } from "react";
 
-interface CategorySectionProps {
+interface ServiceSectionProps {
   title: string;
   options: Array<{ id: string; label: string; checked: boolean }>;
   onChange: (id: string, checked: boolean) => void;
 }
 
-export function CategorySection({
+export function ServiceSection({
   title,
   options,
   onChange,
-}: CategorySectionProps) {
+}: ServiceSectionProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (

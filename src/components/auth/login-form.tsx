@@ -11,9 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 interface LoginFormProps {
   onForgotPassword: () => void;
+  type: "login" | "register";
 }
 
-export function LoginForm({ onForgotPassword }: LoginFormProps) {
+export function LoginForm({ onForgotPassword, type }: LoginFormProps) {
   const { onSubmit } = useAuthForm();
 
   const {
@@ -34,7 +35,11 @@ export function LoginForm({ onForgotPassword }: LoginFormProps) {
         title="Welcome back"
         description="Enter your credentials to sign in"
       />
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+
+      <form
+        onSubmit={handleSubmit((data) => onSubmit(data, type))}
+        className="space-y-4"
+      >
         <FormField
           id="email"
           name="email"
@@ -52,19 +57,6 @@ export function LoginForm({ onForgotPassword }: LoginFormProps) {
           placeholder="********"
           error={errors.password?.message}
           control={control}
-        />
-        <FormField
-          id={"accountType"}
-          name="accountType"
-          label="Account Type"
-          type="select"
-          control={control}
-          error={errors.accountType?.message}
-          options={[
-            { value: "user", label: "User" },
-            { value: "customer", label: "Customer" },
-            { value: "admin", label: "Admin" },
-          ]}
         />
         <div className="flex justify-end">
           <Button

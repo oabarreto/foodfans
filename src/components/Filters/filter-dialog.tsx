@@ -14,7 +14,7 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { CategorySection } from "./category-section";
+import { ServiceSection } from "./service-section";
 import { LocationSection } from "./location-section";
 import { TextFilters } from "./text-filters";
 import { AdditionalFilters } from "./additional-filters";
@@ -151,7 +151,7 @@ export function FilterDialog() {
 
                 <Separator />
 
-                <CategorySection
+                <ServiceSection
                   title="Foods"
                   options={filters.foods}
                   onChange={updateCategoryFilter("foods")}

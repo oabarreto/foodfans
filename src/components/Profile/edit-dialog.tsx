@@ -19,16 +19,10 @@ import { MdEdit } from "react-icons/md";
 interface EditDialogProps {
   title: string;
   children?: ReactNode;
-  submit: () => void;
 }
 
-export function EditDialog({ title, children, submit }: EditDialogProps) {
+export function EditDialog({ title, children }: EditDialogProps) {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleSubmit = () => {
-    setIsOpen(false);
-    submit();
-  };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -49,20 +43,6 @@ export function EditDialog({ title, children, submit }: EditDialogProps) {
         <ScrollArea className="max-h-[70vh]">
           <div className="space-y-6 px-2">{children}</div>
         </ScrollArea>
-        <div className="flex justify-between pt-4">
-          <Button
-            className="hover:bg-rose-500 bg-neutral-300 hover:text-neutral-100 text-rose-500"
-            onClick={() => setIsOpen(false)}
-          >
-            Cancel
-          </Button>
-          <Button
-            className="bg-rose-500 hover:bg-neutral-300 text-neutral-100 hover:text-rose-500"
-            onClick={handleSubmit}
-          >
-            Save
-          </Button>
-        </div>
       </DialogContent>
     </Dialog>
   );

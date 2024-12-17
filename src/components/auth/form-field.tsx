@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Switch } from "../ui/switch";
+import { Textarea } from "../ui/textarea";
 
 export function FormField<T extends FieldValues>({
   id,
@@ -33,9 +34,13 @@ export function FormField<T extends FieldValues>({
             <Label className="text-muted-foreground" htmlFor={id}>
               {label}
             </Label>
-            <Select {...field}>
+            <Select
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+              {...field}
+            >
               <SelectTrigger className="text-neutral-400 hover:text-muted-foreground">
-                <SelectValue placeholder="Select account type" />
+                <SelectValue placeholder={placeholder} />
               </SelectTrigger>
               <SelectContent className="bg-neutral-200 text-muted-foreground">
                 {options.map((option) => (
@@ -62,11 +67,29 @@ export function FormField<T extends FieldValues>({
         name={name}
         control={control}
         render={({ field }) => (
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-col sm:flex-row items-center space-x-2 space-y-2">
             <Switch id={id} {...field} />
             <Label className="text-muted-foreground" htmlFor={id}>
               {label}
             </Label>
+          </div>
+        )}
+      />
+    );
+  }
+
+  if (type === "textarea") {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <div className="space-y-2">
+            <Textarea
+              placeholder={placeholder}
+              {...field}
+              className="min-h-[150px]"
+            />
           </div>
         )}
       />

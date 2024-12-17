@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CatalogCard } from "../Members/CatalogCard";
-import { members } from "@/lib/data/members";
 import {
   Pagination,
   PaginationContent,
@@ -13,22 +12,39 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { cn } from "@/lib/utils";
+import { ListingResponse, useHomeListings } from "@/lib/hooks/use-home";
 
 interface CatalogGridProps {
-  title: string;
+  title?: string;
   itemsPerPage?: number;
+  selectedTypes: string;
 }
 
-export function CatalogGrid({ title, itemsPerPage = 8 }: CatalogGridProps) {
+export function CatalogGrid({
+  title,
+  itemsPerPage = 8,
+  selectedTypes,
+}: CatalogGridProps) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [pageItems, setPageItems] = useState<ListingResponse[]>([]);
+  const { data: listings, loading } = useHomeListings({
+    types: selectedTypes,
+    skip: (currentPage - 1) * itemsPerPage,
+    take: itemsPerPage,
+  });
+
+  useEffect(() => {
+    if (loading) {
+      setPageItems([]); // Limpa os dados ao iniciar um novo request
+    } else if (listings) {
+      setPageItems(listings);
+    }
+  }, [loading, listings]);
 
   // Calculate total pages
-  const totalPages = Math.ceil(members.length / itemsPerPage);
-
-  // Get current page items
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = members.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = listings?.length
+    ? Math.ceil(listings.length / itemsPerPage)
+    : 1;
 
   // Generate page numbers array
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
@@ -46,9 +62,19 @@ export function CatalogGrid({ title, itemsPerPage = 8 }: CatalogGridProps) {
       </h2>
       <div className="flex flex-col items-center justify-center gap-8">
         <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-          {currentItems.map((member) => (
-            <CatalogCard key={Math.random()} {...member} />
-          ))}
+          {pageItems.map((listing) => {
+            const cardImage = listing.media?.find((m) => m.isCard)?.url || "";
+            return (
+              <CatalogCard
+                key={listing.id}
+                name={listing.user.name}
+                description={listing.description}
+                imageUrl={process.env.NEXT_PUBLIC_API_BASE_URL + cardImage}
+                subscription={listing.user.subscription?.name}
+                verified={listing.verified}
+              />
+            );
+          })}
         </div>
 
         <Pagination className="mt-8">

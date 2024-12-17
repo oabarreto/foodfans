@@ -30,10 +30,13 @@ export function AuthTabs() {
         </TabsTrigger>
       </TabsList>
       <TabsContent value="login">
-        <LoginForm onForgotPassword={() => setActiveTab("forgot-password")} />
+        <LoginForm
+          type={"login"}
+          onForgotPassword={() => setActiveTab("forgot-password")}
+        />
       </TabsContent>
       <TabsContent value="register">
-        <RegisterForm />
+        <RegisterForm type={"register"} />
       </TabsContent>
       <TabsContent value="forgot-password">
         <ForgotPasswordForm />

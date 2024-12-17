@@ -19,7 +19,7 @@ export function Header() {
   const router = useRouter();
 
   const handleGoToLogin = () => {
-    router.push("/login"); // Navega para a página de login
+    router.push("/login");
   };
 
   const toggleHeader = () => {

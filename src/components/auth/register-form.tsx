@@ -8,7 +8,11 @@ import { SubmitButton } from "./submit-button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export function RegisterForm() {
+interface LoginFormProps {
+  type: "login" | "register"; // Define se o formulário é login ou registro
+}
+
+export function RegisterForm({ type }: LoginFormProps) {
   const { onSubmit } = useAuthForm();
 
   const {
@@ -18,10 +22,13 @@ export function RegisterForm() {
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
+      nickname: "",
       name: "",
       email: "",
+      phone: "",
       password: "",
       confirmPassword: "",
+      accountType: "USER",
     },
   });
 
@@ -31,7 +38,10 @@ export function RegisterForm() {
         title="Create an account"
         description="Enter your information to get started"
       />
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={handleSubmit((data) => onSubmit(data, type))}
+        className="space-y-4"
+      >
         <FormField
           id="nickname"
           name="nickname"
@@ -48,6 +58,17 @@ export function RegisterForm() {
           error={errors.name?.message}
           control={control}
         />
+
+        <FormField
+          id="birthdate"
+          name="birthdate"
+          label="Birthdate"
+          type="text"
+          placeholder="mm/dd/yyyy"
+          error={errors.birthdate?.message}
+          control={control}
+        />
+
         <FormField
           id="email"
           name="email"
@@ -88,6 +109,7 @@ export function RegisterForm() {
           id={"accountType"}
           name="accountType"
           label="Account Type"
+          placeholder="Select account type"
           type="select"
           control={control}
           error={errors.accountType?.message}

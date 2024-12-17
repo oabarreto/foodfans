@@ -5,7 +5,7 @@ interface CatalogCardProps {
   name: string;
   description?: string;
   imageUrl: string;
-  isExclusive?: boolean;
+  subscription?: string;
   rating?: number;
   verified?: boolean;
 }
@@ -14,7 +14,7 @@ export function CatalogCard({
   name,
   description,
   imageUrl,
-  isExclusive,
+  subscription,
   rating,
   verified,
 }: CatalogCardProps) {
@@ -26,9 +26,9 @@ export function CatalogCard({
           alt={name}
           className="w-full h-[32rem] object-cover"
         />
-        {isExclusive && (
+        {subscription && (
           <div className="absolute top-4 left-4 bg-rose-500 text-white text-xs px-3 py-1 rounded-full font-medium">
-            Exclusive
+            {subscription}
           </div>
         )}
 

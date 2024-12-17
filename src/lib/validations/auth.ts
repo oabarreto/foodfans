@@ -7,6 +7,8 @@ const phoneRegex =
 
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).+$/;
 
+const birthdateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/\d{4}$/;
+
 const accountTypeEnum = z.enum(
   accountTypeOptions.map((opt) => opt.value) as [AccountType, ...AccountType[]],
   {
@@ -23,7 +25,6 @@ export const loginSchema = z.object({
       message:
         "Password must contain at least one uppercase letter, one lowercase letter, and one number",
     }),
-  accountType: accountTypeEnum,
 });
 
 export const registerSchema = z
@@ -32,6 +33,13 @@ export const registerSchema = z
       .string()
       .min(2, { message: "Nickname must be at least 2 characters" }),
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+    birthdate: z
+      .string()
+      .regex(birthdateRegex, "Birthdate must be in mm/dd/yyyy")
+      .refine(
+        (date) => !isNaN(Date.parse(date)),
+        "Birthdate must be a valid date"
+      ),
     email: z.string().email({ message: "Invalid email address" }),
     phone: z.string().regex(phoneRegex, { message: "Invalid Number" }),
     password: z

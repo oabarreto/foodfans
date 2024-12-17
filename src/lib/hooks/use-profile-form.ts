@@ -1,12 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { personalFormValues, passwordFormValues } from "../validations/profile";
+import {
+  personalFormValues,
+  passwordFormValues,
+  aboutFormValues,
+  servicesFormValues,
+} from "../validations/profile";
 
 export function useProfileForm() {
   const [isPending, setIsPending] = useState(false);
 
-  const onSubmit = async (data: personalFormValues | passwordFormValues) => {
+  const onSubmit = async (
+    data:
+      | personalFormValues
+      | passwordFormValues
+      | aboutFormValues
+      | servicesFormValues
+  ) => {
     setIsPending(true);
     try {
       // Here you would implement your authentication logic
