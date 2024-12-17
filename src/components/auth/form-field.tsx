@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Switch } from "../ui/switch";
 
 export function FormField<T extends FieldValues>({
   id,
@@ -32,7 +33,7 @@ export function FormField<T extends FieldValues>({
             <Label className="text-muted-foreground" htmlFor={id}>
               {label}
             </Label>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <Select {...field}>
               <SelectTrigger className="text-neutral-400 hover:text-muted-foreground">
                 <SelectValue placeholder="Select account type" />
               </SelectTrigger>
@@ -49,6 +50,23 @@ export function FormField<T extends FieldValues>({
               </SelectContent>
             </Select>
             {error && <p className="text-sm text-red-500">{error}</p>}
+          </div>
+        )}
+      />
+    );
+  }
+
+  if (type === "switch") {
+    return (
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <div className="flex items-center space-x-2">
+            <Switch id={id} {...field} />
+            <Label className="text-muted-foreground" htmlFor={id}>
+              {label}
+            </Label>
           </div>
         )}
       />

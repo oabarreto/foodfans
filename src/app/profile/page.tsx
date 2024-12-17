@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart, Flag } from "lucide-react";
+import { Heart, Flag, VerifiedIcon } from "lucide-react";
 import { ProfileGallery } from "@/components/Profile/gallery";
 import { ProfileReviews } from "@/components/Profile/reviews";
 import { ProfileInfo } from "@/components/Profile/info";
@@ -43,6 +43,12 @@ export default function ProfilePage() {
           </div>
 
           <div className="text-center space-y-2 mb-2">
+            <div className="flex flex-row items-center justify-center gap-1 my-2">
+              <VerifiedIcon className={"w-6 h-6  text-blue-500 rounded-sm"} />
+              <span className="text-sm font-semibold text-muted-foreground">
+                Verified
+              </span>
+            </div>
             <h1 className="text-2xl font-bold text-muted-foreground">
               Jane Porter
             </h1>

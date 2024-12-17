@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button";
 import {
   MessageCircle,
   MapPinnedIcon,
-  VerifiedIcon,
   PhoneIcon,
   CoinsIcon,
 } from "lucide-react";
 import { MdEdit } from "react-icons/md";
+import { EditDialog } from "./edit-dialog";
+import { EditPersonalForm } from "./edit-personal-form";
+import { useAuthForm } from "@/lib/hooks/use-auth-form";
 
 export function ProfileInfo() {
   const physicalCharacteristics = {
@@ -35,27 +37,26 @@ export function ProfileInfo() {
     window.open(`https://wa.me/${phoneNumber.replace(/\D/g, "")}`, "_blank");
   };
 
+  const { onSubmit: personalSubmit } = useAuthForm();
+
   return (
     <div className="space-y-6">
       <Card className="bg-neutral-100">
         <CardHeader className="flex-row items-center justify-between">
           <CardTitle className="text-muted-foreground">Personnal</CardTitle>
-          <Button
+          {/* <Button
             size="icon"
             className={
               "bg-rose-400 hover:bg-neutral-300 text-neutral-100 hover:text-rose-400 m-0"
             }
           >
             <MdEdit />
-          </Button>
+          </Button> */}
+          <EditDialog title={"Personnal"} submit={() => console.log("Save")}>
+            <EditPersonalForm onSubmitExternal={personalSubmit} />
+          </EditDialog>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="flex flex-row items-center gap-1 my-2">
-            <VerifiedIcon className={"w-6 h-6  text-blue-500 rounded-sm"} />
-            <span className="text-sm font-semibold text-muted-foreground">
-              Verified
-            </span>
-          </div>
           <div className="flex items-center justify-start gap-2">
             <MapPinnedIcon className="text-muted-foreground" size={20} />
             <span className="text-muted-foreground">New York</span>
